@@ -18,9 +18,7 @@ class ReadThreadsTest extends TestCase
         $this->thread = create('App\Thread');
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function a_user_can_view_all_threads()
     {
         $this->get('/threads')->assertSee($this->thread->title);
