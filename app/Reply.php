@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reply extends Model
 {
+    use Favoritable;
+
     protected $fillable = ['body', 'user_id', 'thread_id'];
+
+    protected $with = ['owner', 'favorites'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
