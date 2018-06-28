@@ -8,7 +8,7 @@
                     <div class="card-header">Create a New Thread</div>
 
                     <div class="card-body">
-                        <form action="/threads" method="post" role="form">
+                        <form action="{{ route('threads.index') }}" method="post" role="form">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="channel_id">Choose a Channel</label>

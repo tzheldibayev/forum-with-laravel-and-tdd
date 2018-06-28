@@ -21,7 +21,7 @@ class ReadThreadsTest extends TestCase
     /** @test */
     public function a_user_can_view_all_threads()
     {
-        $this->get('/threads')->assertSee($this->thread->title);
+        $this->get(route('threads.index'))->assertSee($this->thread->title);
     }
 
     /** @test */
@@ -47,9 +47,7 @@ class ReadThreadsTest extends TestCase
 
         $threadNotInChannel = create('App\Thread');
 
-        $this->get('/threads/'.$channel->slug)
-            ->assertSee($threadInChannel->title)
-            ->assertDontSee($threadNotInChannel->title);
+        $this->get(route('threads.index', $channel->slug))->assertSee($threadInChannel->title)->assertDontSee($threadNotInChannel->title);
     }
 
     /** @test */
@@ -61,9 +59,7 @@ class ReadThreadsTest extends TestCase
 
         $threadNotByJohn = create('App\Thread');
 
-        $this->get('/threads/?by=JohnDoe')
-            ->assertSee($threadByJohn->title)
-            ->assertDontSee($threadNotByJohn->title);
+        $this->get(route('threads.index', '?by=JohnDoe'))->assertSee($threadByJohn->title)->assertDontSee($threadNotByJohn->title);
     }
 
     /** @test */
@@ -77,7 +73,7 @@ class ReadThreadsTest extends TestCase
 
         $threadWithNoReplies = $this->thread;
 
-        $response = $this->getJson('/threads?popular=1')->json();
+        $response = $this->getJson(route('threads.index', '?popular=1'))->json();
 
         $this->assertEquals([3, 2, 0], array_column($response, 'replies_count'));
     }

@@ -28,7 +28,7 @@ class CreateThreadsTest extends TestCase
 
         $thread = make('App\Thread');
 //dd($thread->path());
-        $response = $this->post('/threads', $thread->toArray());
+        $response = $this->post(route('threads.index'), $thread->toArray());
 
         //dd($resplonse->headers->get('Location'));
 
@@ -94,6 +94,7 @@ class CreateThreadsTest extends TestCase
     public function threads_may_only_be_deleted_by_those_who_have_permission()
     {
         // TODO: make a test
+        $this->assertTrue(true);
     }
 
     public function publishThread($overrides = [])
@@ -102,6 +103,6 @@ class CreateThreadsTest extends TestCase
 
         $thread = make('App\Thread', $overrides);
 
-        return $this->post('threads', $thread->toArray());
+        return $this->post(route('threads.index'), $thread->toArray());
     }
 }

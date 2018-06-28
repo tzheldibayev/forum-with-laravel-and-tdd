@@ -14,8 +14,7 @@ class ProfileTest extends TestCase
     {
         $user = create('App\User');
 
-        $this->get('/profile/'.$user->name)
-            ->assertSee($user->name);
+        $this->get(route('profile', $user->name))->assertSee($user->name);
     }
 
     /** @test */
@@ -25,8 +24,6 @@ class ProfileTest extends TestCase
 
         $thread = create('App\Thread', ['user_id' => $user->id]);
 
-        $this->get('/profile/'.$user->name)
-            ->assertSee($thread->title)
-            ->assertSee($thread->body);
+        $this->get(route('profile', $user->name))->assertSee($thread->title)->assertSee($thread->body);
     }
 }

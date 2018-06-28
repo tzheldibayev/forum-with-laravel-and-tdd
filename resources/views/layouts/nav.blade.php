@@ -17,22 +17,22 @@
                        aria-haspopup="true"
                        aria-expanded="false">Browse<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/threads" class="dropdown-item">All Threads</a></li>
+                        <li><a href="{{ route('threads.index') }}" class="dropdown-item">All Threads</a></li>
                         @if(auth()->check())
-                            <li><a href="/threads?by={{ auth()->user()->name }}" class="dropdown-item">My Threads</a>
+                            <li><a href="{{ route('threads.index', '?by='. auth()->user()->name ) }}" class="dropdown-item">My Threads</a>
                             </li>
                         @endif
-                        <li><a href="/threads?popular=1" class="dropdown-item">Popular Threads</a></li>
+                        <li><a href="{{ route('threads.index', '?popular=1') }}" class="dropdown-item">Popular Threads</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a href="/threads/create" class="nav-link">New Thread</a></li>
+                <li class="nav-item"><a href="{{ route('threads.create') }}" class="nav-link">New Thread</a></li>
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                        aria-haspopup="true"
                        aria-expanded="false">Channels<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         @foreach($channels as $channel)
-                            <li><a href="{{ '/threads/'.$channel->slug }}"
+                            <li><a href="{{ route('threads.index', $channel->slug) }}"
                                    class="dropdown-item">{{ $channel->name }}</a></li>
                         @endforeach
                     </ul>
