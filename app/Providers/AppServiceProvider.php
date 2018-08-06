@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
             $channels = Channel::all();
             //$channels = \Illuminate\Support\Facades\Cache::rememberForever('channels', function() {
             //    return Channel::all();
-            //}); 
+            //});
            $view->with('channels', $channels);
         });
     }
